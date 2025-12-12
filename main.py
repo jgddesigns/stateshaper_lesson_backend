@@ -49,15 +49,17 @@ def get_sample_data():
         "timestamp": "2024-01-01T00:00:00Z"
     }
 
-    return {
-        "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
-        },
-        "body": json.dumps(data)
-    }
+    return data
+
+    # return {
+    #     "statusCode": 200,
+    #     "headers": {
+    #         "Access-Control-Allow-Origin": "*",
+    #         "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    #         "Access-Control-Allow-Headers": "Content-Type",
+    #     },
+    #     "body": json.dumps(data)
+    # }
 
 
 
