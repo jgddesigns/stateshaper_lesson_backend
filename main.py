@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from classes.connector.Connector import Connector
-from run import RunEngine
+from src.main.classes.connector.Connector import Connector
+from src.main.run import RunEngine
 
 run = RunEngine()
 
