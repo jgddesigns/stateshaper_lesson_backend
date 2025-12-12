@@ -15,7 +15,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Or specify your frontend URL
+    allow_origins=["https://mse-ads.vercel.app"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,7 +25,7 @@ class Input(BaseModel):
     message: str
 
 
-@app.post("/api/data")
+@app.post("/api/start")
 def start():
     ads = run.plugin.get_data()
     run.connector = Connector(ads)
@@ -43,27 +43,12 @@ def process(input: Input):
     return {"response": {"ads": new_data, "ratings": run.plugin.interests, "seed": run.seed}}
 
 
-# @app.post("/api/data")
-# def get_sample_data():
-#     data = {
-#         "data": [
-#             {"id": 1, "name": "Sample Item 1", "value": 100},
-#             {"id": 2, "name": "Sample Item 2", "value": 200},
-#             {"id": 3, "name": "Sample Item 3", "value": 300}
-#         ],
-#         "total": 3,
-#         "timestamp": "2024-01-01T00:00:00Z"
-#     }
-
-#     return data
-
-
-@app.get("/")
-def read_root():
-    ads = run.plugin.get_data()
-    run.connector = Connector(ads)
-    run.run_engine()
-    return {"response": {"ads": ads, "ratings": run.plugin.interests, "seed": run.seed}}
+# @app.get("/")
+# def read_root():
+#     ads = run.plugin.get_data()
+#     run.connector = Connector(ads)
+#     run.run_engine()
+#     return {"response": {"ads": ads, "ratings": run.plugin.interests, "seed": run.seed}}
 
 
 def clean_input(input):
