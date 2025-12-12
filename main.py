@@ -28,10 +28,11 @@ app = FastAPI(
 #     run.connector = Connector(new_data)
 #     run.run_engine()
 #     return {"response": {"ads": new_data, "ratings": run.plugin.interests, "seed": run.seed}}
+import json
 
 @app.post("/api/data")
 def get_sample_data():
-    return {
+    data = {
         "data": [
             {"id": 1, "name": "Sample Item 1", "value": 100},
             {"id": 2, "name": "Sample Item 2", "value": 200},
@@ -39,6 +40,18 @@ def get_sample_data():
         ],
         "total": 3,
         "timestamp": "2024-01-01T00:00:00Z"
+    }
+
+
+
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+        },
+        "body": json.dumps(data)
     }
 
 
