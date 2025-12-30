@@ -9,8 +9,6 @@ from src.main.demos.lesson_plan.LessonPlan import LessonPlan
 from src.main.run import RunEngine
 from fastapi.middleware.cors import CORSMiddleware
 lessons = LessonPlan()
-run = Connector(lessons.sort_ratings())
-run.start_connect()
 
 count = 10
 
@@ -23,7 +21,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://stateshaper-lessons.vercel.app"],  
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -34,6 +32,9 @@ class Input(BaseModel):
 
 @app.post("/api/start")
 def start():
+    run = Connector(lessons.sort_ratings())
+    run.start_connect()
+
     lessons.get_data(count)
     run.engine["vocab"] = run.compressed_seed["v"]
     return {"response": {"lesson": run.engine["vocab"], "questions": lessons.current_questions, "ratings": lessons.current_ratings, "seed": [run.compressed_seed, run.engine]}}
